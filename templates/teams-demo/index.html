@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block mainheader %}Teams Demo{% endblock %}
+{% block content %}
+
+<form action="/create-channel" method="POST">
+  <div class="form-group row">
+    <div class="col-5">
+      <h2>Team: {{ team.displayName }}</h2>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-5">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text pr-1">IncidentChannel-</div>
+        </div>
+        <input type="text" class="form-control" name="channelName" placeholder="Channel name">
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-5">
+      <label for="members">Add members from team (Hold CTRL to select multiple)</label>
+      <select multiple class="form-control" id="members" name="members">
+        {% for member in teamMembers %}
+        <option value="{{ member.userId }}">{{ member.displayName }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-5">
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" name="incidentDescription" placeholder="Short description of incident">
+      </div>
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary btn-md mb-2">Create Channel</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
