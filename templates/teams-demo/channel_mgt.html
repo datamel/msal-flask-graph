@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block mainheader %}Teams Demo{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Channel Details
+                </div>
+                <div class="card-body">
+                    <p>Channel name: {{ channel.displayName }}</p>
+                    <p>Channel desc: {{ channel.description }}</p>
+                    <p>Created: {{ channel.createdDateTime }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Channel Members
+                </div>
+                <div class="card-body">
+                    <ul>
+                    {% for member in channelMembers %}
+                    <li>{{ member.displayName }}</li>
+                    {% endfor %}
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3"></div>
+    <div class="row">
+        <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                Issue a Status Update
+            </div>
+            <div class="card-body">
+                <form action="/status-update" method="POST">
+                    <input type="hidden" id="channelId" name="channelId" value="{{ channel.id }}">
+                    <div class="form-group row">
+                        <div class="col-auto">
+                            <select class="custom-select" name="status" required>
+                                <option value="Status Update - Issue being investigated">Status Update - Issue being investigated</option>
+                                <option value="Status Update - Issue diagnosed">Status Update - Issue diagnosed</option>
+                                <option value="Status Update - Issue resolved">Status Update - Issue resolved</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control" name="message"
+                                    placeholder="Additional message">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary btn-md mb-2">Update Status in Channel</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
