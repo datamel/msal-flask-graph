@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block mainheader %}Microsoft Identity{% endblock %}
+{% block content %}
+  <pre>{{ result |tojson(indent=4) }}</pre>
+{% endblock %}
